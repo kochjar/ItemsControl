@@ -1,0 +1,45 @@
+﻿<Window x:Class="ItemsControl_Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ItemsControl_Test"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    <Grid>
+       
+        <ItemsControl ItemsSource="{Binding huse}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        
+                    <Border Padding="15" BorderBrush="LightGray" BorderThickness="1" Margin="10" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Adresse}" />
+                            <TextBlock Text="{Binding Kvm}" />
+
+                            <StackPanel x:Name="LejemålStackPanel" Visibility="{Binding LejemålFindes, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
+
+                                <TextBlock Text="Lejemål:" />
+                                <TextBlock Text="{Binding Lejemål}" />
+                                <TextBlock Text="{Binding LejemålFindes}" />
+                                
+                            </StackPanel>
+
+                            <Button Content="Edit" Click="EditButton_Click" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        
+    </Grid>
+</Window>
